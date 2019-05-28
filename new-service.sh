@@ -74,15 +74,15 @@ if [ ! -w /etc/init.d ]; then
   echo ""
   echo "   mv \"$SERVICE_FILE\" \"/etc/init.d/$NAME\""
   echo "   touch \"/var/log/$NAME.log\" && chown \"$USERNAME\" \"/var/log/$NAME.log\""
-  echo "   update-rc.d \"$NAME\" defaults"
+  echo "   update-rc.d \"$NAME\" defaults || chkconfig --add \"$NAME\""
   echo "   service \"$NAME\" start"
 else
   echo "1. mv \"$SERVICE_FILE\" \"/etc/init.d/$NAME\""
   mv -v "$SERVICE_FILE" "/etc/init.d/$NAME"
   echo "2. touch \"/var/log/$NAME.log\" && chown \"$USERNAME\" \"/var/log/$NAME.log\""
   touch "/var/log/$NAME.log" && chown "$USERNAME" "/var/log/$NAME.log"
-  echo "3. update-rc.d \"$NAME\" defaults"
-  update-rc.d "$NAME" defaults
+  echo "3. update-rc.d \"$NAME\" defaults || chkconfig --add \"$NAME\""
+  update-rc.d "$NAME" defaults || chkconfig --add "$NAME" 
   echo "4. service \"$NAME\" start"
   service "$NAME" start
 fi
@@ -91,6 +91,6 @@ echo ""
 echo "---Uninstall instructions ---"
 echo "The service can uninstall itself:"
 echo "    service \"$NAME\" uninstall"
-echo "It will simply run update-rc.d -f \"$NAME\" remove && rm -f \"/etc/init.d/$NAME\""
+echo "It will simply run update-rc.d -f \"$NAME\" remove && chkconfig --del \"$NAME\" && rm -f \"/etc/init.d/$NAME\""
 echo ""
 echo "--- Terminated ---"
