@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SERVICE_FILE=$(tempfile)
+SERVICE_FILE=/tmp/$(date +%Y%m%d%H%M%S)
 
 if [ ! -e service.sh ]; then
   echo "--- Download template ---"
