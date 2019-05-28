@@ -6,11 +6,11 @@ if [ ! -e service.sh ]; then
   echo "--- Download template ---"
   echo "I'll now download the service.sh, because is is not downloaded."
   echo "..."
-  wget -q https://github.com/superkzh/sysvinit-service-generator/blob/master/service.sh
+  wget -q https://raw.githubusercontent.com/superkzh/sysvinit-service-generator/master/service.sh
   if [ "$?" != 0 ]; then
     echo "I could not download the template!"
     echo "You should now download the service.sh file manualy. Run therefore:"
-    echo "wget https://github.com/superkzh/sysvinit-service-generator/blob/master/service.sh"
+    echo "wget https://raw.githubusercontent.com/superkzh/sysvinit-service-generator/master/service.sh"
     exit 1
   else
     echo "I donloaded the template sucessfully"
