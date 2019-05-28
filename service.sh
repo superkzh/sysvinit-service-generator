@@ -1,4 +1,10 @@
 #!/bin/sh
+#
+# chkconfig: - 86 14
+# description: <DESCRIPTION>
+# processname: <NAME>
+#
+
 ### BEGIN INIT INFO
 # Provides:          <NAME>
 # Required-Start:    $local_fs $network $named $time $syslog
@@ -54,7 +60,7 @@ uninstall() {
     stop
     rm -f "$PIDFILE"
     echo "Notice: log file was not removed: $LOGFILE" >&2
-    update-rc.d -f $NAME remove
+    update-rc.d -f $NAME remove || chkconfig  --del $NAME
     rm -fv "$0"
   else
     echo "Abort!"
